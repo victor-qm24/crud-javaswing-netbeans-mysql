@@ -25,7 +25,9 @@ public class TipoDocumentoDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                TipoDocumento tipo = new TipoDocumento(rs.getInt("id"), rs.getString("descripcion_tipo"));
+                TipoDocumento tipo = new TipoDocumento(rs.getInt(
+                        "id"), rs.getString(
+                                "descripcion_tipo"));
                 tipos.add(tipo);
             }
         }

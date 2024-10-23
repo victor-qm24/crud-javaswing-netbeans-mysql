@@ -19,7 +19,8 @@ public class RolDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Rol rol = new Rol(rs.getInt("id"), rs.getString("descripcion_rol"));
+                Rol rol = new Rol(rs.getInt("id"), 
+                        rs.getString("descripcion_rol"));
                 roles.add(rol);
             }
         }

@@ -11,10 +11,12 @@ import java.util.List;
 public class UsuarioDAO {
     
     public void agregarUsuario(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO Usuarios (nombre, apellido, documento, email, "
-                + "telefono, usuario, contraseña, estado, tipo_documento_id_usuario, "
-                + "proyecto_id_usuario, rol_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO Usuarios (nombre, apellido, documento, email,"
+                + "telefono, usuario, contraseña, estado, "
+                + "tipo_documento_id_usuario, proyecto_id_usuario, "
+                + "rol_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, usuario.getNombre());
             pstmt.setString(2, usuario.getApellido());
             pstmt.setString(3, usuario.getDocumento());
@@ -31,11 +33,12 @@ public class UsuarioDAO {
     }
     
     public void actualizarUsuario(Usuario usuario) throws SQLException {
-        String sql = "UPDATE Usuarios SET nombre = ?, apellido = ?, documento = ?, "
-                + "email = ?, telefono = ?, usuario = ?, contraseña = ?, estado = ?, "
+        String sql = "UPDATE Usuarios SET nombre =?, apellido =?, documento =?,"
+                + "email =?, telefono =?, usuario =?, contraseña =?, estado =?,"
                 + "tipo_documento_id_usuario = ?, proyecto_id_usuario = ?,"
                 + "rol_id_usuario = ? WHERE id = ?";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, usuario.getNombre());
             pstmt.setString(2, usuario.getApellido());
             pstmt.setString(3, usuario.getDocumento());
@@ -54,7 +57,8 @@ public class UsuarioDAO {
     
     public void eliminarUsuario(int id) throws SQLException {
         String sql = "DELETE FROM Usuarios WHERE id = ?";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
@@ -63,13 +67,11 @@ public class UsuarioDAO {
     public Usuario buscarUsuario(int id) throws SQLException {
         //List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM Usuarios WHERE id = ?";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                
-                //Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nombre"), rs.getString("email"), rs.getInt("tipo_documento_id"), rs.getInt("proyecto_id"));
-                //usuarios.add(usuario);
+            if (rs.next()) { 
                 return new Usuario(
                         rs.getInt("id"),
                         rs.getString("nombre"),
@@ -80,7 +82,8 @@ public class UsuarioDAO {
                         rs.getString("usuario"),
                         rs.getString("contraseña"),
                         rs.getString("estado"),                                               
-                        rs.getInt("tipo_documento_id_usuario"),
+                        rs.getInt(
+                                "tipo_documento_id_usuario"),
                         rs.getInt("proyecto_id_usuario"),
                         rs.getInt("rol_id_usuario") 
                 );
@@ -106,7 +109,8 @@ public class UsuarioDAO {
                         rs.getString("usuario"),
                         rs.getString("contraseña"),
                         rs.getString("estado"),                                               
-                        rs.getInt("tipo_documento_id_usuario"),
+                        rs.getInt(
+                                "tipo_documento_id_usuario"),
                         rs.getInt("proyecto_id_usuario"),
                         rs.getInt("rol_id_usuario") 
                 );
@@ -118,16 +122,20 @@ public class UsuarioDAO {
     
     public void inactivarUsuario(int id, String estado) throws SQLException {
        String sql = "UPDATE Usuarios SET estado = ? WHERE id = ?";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, estado);         
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
         }  
     }
     
-    public Usuario buscarDatosSesion(String user, String pass) throws SQLException {
-        String sql = "SELECT * FROM Usuarios WHERE usuario = ? and contraseña = ?";
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public Usuario buscarDatosSesion(String user, String pass) 
+            throws SQLException {
+        String sql = "SELECT * FROM Usuarios WHERE usuario = ? and contraseña "
+                + "= ?";
+        try (Connection conn = ConexionBD.getConnection(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user);
             pstmt.setString(2, pass);
             ResultSet rs = pstmt.executeQuery();
@@ -144,7 +152,8 @@ public class UsuarioDAO {
                         rs.getString("usuario"),
                         rs.getString("contraseña"),
                         rs.getString("estado"),                                               
-                        rs.getInt("tipo_documento_id_usuario"),
+                        rs.getInt(
+                                "tipo_documento_id_usuario"),
                         rs.getInt("proyecto_id_usuario"),
                         rs.getInt("rol_id_usuario") 
                 );

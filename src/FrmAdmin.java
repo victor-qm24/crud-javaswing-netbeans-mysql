@@ -438,9 +438,7 @@ public class FrmAdmin extends javax.swing.JFrame {
 
     private void actualizarUsuario() {
         String idString = txtId.getText();
-
         if (!idString.isEmpty()) {
-
             int id = Integer.parseInt(idString);
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
@@ -450,29 +448,29 @@ public class FrmAdmin extends javax.swing.JFrame {
             String usuario = txtUsuario.getText();
             String contraseña = txtContraseña.getText();
             String estado = (String) comboEstado.getSelectedItem();
-
-            TipoDocumento tipoDocumento = (TipoDocumento) comboTipoDocumento.getSelectedItem();
+            TipoDocumento tipoDocumento = 
+                    (TipoDocumento) comboTipoDocumento.getSelectedItem();
             Proyecto proyecto = (Proyecto) comboProyecto.getSelectedItem();
             Rol rol = (Rol) comboRol.getSelectedItem();
 
             if (tipoDocumento != null && proyecto != null) {
-
                 try {
-                    usuarioDAO.actualizarUsuario(new Usuario(id, nombre, apellido,
-                            documento, email, telefono, usuario, contraseña, estado,
-                            tipoDocumento.getId(), proyecto.getId(), rol.getId()));
-
-                    JOptionPane.showMessageDialog(this, "Usuario actualizado exitosamente.");
-                    //loadUsuarios(); // Recargar la lista de usuarios
+                    usuarioDAO.actualizarUsuario(new Usuario(id, nombre, 
+                            apellido,documento, email, telefono, usuario, 
+                            contraseña, estado,tipoDocumento.getId(), 
+                            proyecto.getId(), rol.getId()));
+                    JOptionPane.showMessageDialog(this, 
+                            "Usuario actualizado exitosamente.");                    
                     limpiar();
                 } catch (SQLException e) {
-
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Por favor seleccione un tipo de documento.");
+                JOptionPane.showMessageDialog(this, 
+                        "Por favor seleccione un tipo de documento.");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un usuario para actualizar.");
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor seleccione un usuario para actualizar.");
         }
     }
 
@@ -483,16 +481,15 @@ public class FrmAdmin extends javax.swing.JFrame {
             int id = Integer.parseInt(idString);
             try {
                 usuarioDAO.eliminarUsuario(id);
-                JOptionPane.showMessageDialog(this, "Usuario eliminado exitosamente.");
-
+                JOptionPane.showMessageDialog(this, 
+                        "Usuario eliminado exitosamente.");
                 limpiar();
-
             } catch (SQLException e) {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un usuario para eliminar.");
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor seleccione un usuario para eliminar.");
         }
-
     }
 
     private void buscarUsuario() {
@@ -506,10 +503,7 @@ public class FrmAdmin extends javax.swing.JFrame {
                 if (usuario != null) {
                     List<Usuario> users = new ArrayList<>();
                     users.add(usuario);
-                    for (Usuario user : users) {
-                        listModel.addElement(user);
-                    }
-
+                    for(Usuario user:users){listModel.addElement(user);}
                     txtId.setText(String.valueOf(usuario.getId()));
                     txtNombre.setText(usuario.getNombre());
                     txtApellido.setText(usuario.getApellido());
@@ -519,17 +513,23 @@ public class FrmAdmin extends javax.swing.JFrame {
                     txtUsuario.setText(usuario.getUsuario());
                     txtContraseña.setText(usuario.getContraseña());
                     comboEstado.setSelectedItem(usuario.getEstado());
-                    comboTipoDocumento.setSelectedItem(new TipoDocumento(usuario.getTipoDocumentoId(), ""));
-                    comboProyecto.setSelectedItem(new Proyecto(usuario.getProyectoId(), "", "", ""));
-                    comboRol.setSelectedItem(new Rol(usuario.getRolId(), ""));
-
+                    comboTipoDocumento.setSelectedItem(
+                            new TipoDocumento(usuario.getTipoDocumentoId(), 
+                                    ""));
+                    comboProyecto.setSelectedItem(new Proyecto(
+                            usuario.getProyectoId(), "", "", 
+                            ""));
+                    comboRol.setSelectedItem(new Rol(usuario.getRolId(), 
+                            ""));
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuario no encontrado.");
+                    JOptionPane.showMessageDialog(this, 
+                            "Usuario no encontrado.");
                 }
             } catch (SQLException e) {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese un ID para buscar.");
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor ingrese un ID para buscar.");
         }
     }
 
@@ -540,7 +540,6 @@ public class FrmAdmin extends javax.swing.JFrame {
         try {
             List<Usuario> usuarios = usuarioDAO.obtenerUsuarios();
             for (Usuario usuario : usuarios) {
-
                 listModel.addElement(usuario);
             }
         } catch (SQLException e) {
@@ -554,14 +553,16 @@ public class FrmAdmin extends javax.swing.JFrame {
                 int id = Integer.parseInt(idString);
                 String estado = "Inactivo";
                 usuarioDAO.inactivarUsuario(id, estado);
-                JOptionPane.showMessageDialog(this, "Usuario actualizado exitosamente.");
+                JOptionPane.showMessageDialog(this, 
+                        "Usuario actualizado exitosamente.");
                 limpiar();
             } catch (SQLException ex) {
-                Logger.getLogger(FrmAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmAdmin.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
-
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un usuario para actualizar.");
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor seleccione un usuario para actualizar.");
         }
     }
 

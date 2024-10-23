@@ -341,7 +341,8 @@ public class FrmRegistro extends javax.swing.JFrame {
         String contraseña = txtContraseña.getText();
         String estado = (String) comboEstado.getSelectedItem();
 
-        TipoDocumento tipoDocumento = (TipoDocumento) comboTipoDocumento.getSelectedItem();
+        TipoDocumento tipoDocumento = 
+                (TipoDocumento) comboTipoDocumento.getSelectedItem();
         Proyecto proyecto = (Proyecto) comboProyecto.getSelectedItem();
         Rol rol = (Rol) comboRol.getSelectedItem();
 
@@ -349,7 +350,8 @@ public class FrmRegistro extends javax.swing.JFrame {
             try {
                 usuarioDAO.agregarUsuario(new Usuario(0, nombre, apellido,
                         documento, email, telefono, usuario, contraseña, estado,
-                        tipoDocumento.getId(), proyecto.getId(), rol.getId()));
+                        tipoDocumento.getId(), 
+                        proyecto.getId(), rol.getId()));
                 limpiar();
             } catch (SQLException e) {
             }

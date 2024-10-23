@@ -24,7 +24,10 @@ public class ProyectoDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Proyecto py = new Proyecto(rs.getInt("id"), rs.getString("titulo"),rs.getString("estado"),rs.getString("ubicacion"));
+                Proyecto py = new Proyecto(rs.getInt("id"), 
+                        rs.getString("titulo"),
+                        rs.getString("estado"),
+                        rs.getString("ubicacion"));
                 proyectos.add(py);
             }
         }

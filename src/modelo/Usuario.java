@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo;
 
 public class Usuario {
@@ -61,8 +58,8 @@ public class Usuario {
     @Override
     public String toString() {
         return "ID: " + id + ", Nombre: " + nombre + ", Apellido: " + apellido 
-                + ", Documento: " + documento + ", Email: " + email + ", Telefono: " 
-                + telefono +", Usuario: " + usuario + ", Contraseña: " + contraseña
-                + ", Estado: " + estado;
+                + ", Documento: " + documento + ", Email: " + email + ", "
+                + "Telefono: " + telefono +", Usuario: " + usuario + ", "
+                + "Contraseña: " + contraseña + ", Estado: " + estado;
     }
 }

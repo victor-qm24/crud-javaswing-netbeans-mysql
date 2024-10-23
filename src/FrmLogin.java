@@ -126,11 +126,9 @@ public class FrmLogin extends javax.swing.JFrame {
     private void ingresar() {
         String user = txtUser.getText();
         String pass = txtPass.getText();
-
         if (!user.isEmpty() && !pass.isEmpty()) {
             try {
                 Usuario usuario = usuarioDAO.buscarDatosSesion(user, pass);
-
                 if (usuario != null) {
                     String estado = usuario.getEstado();
                     int rolId = usuario.getRolId();
@@ -145,17 +143,25 @@ public class FrmLogin extends javax.swing.JFrame {
                             dispose();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "Usuario o contraseña correctos pero su estado es inactivo. Si deseas más información comunicate con el administrador.");
+                        JOptionPane.showMessageDialog(this, 
+                                "Usuario o contraseña correctos pero su "
+                                        + "estado es inactivo. Si deseas más "
+                                        + "información comunicate con el "
+                                        + "administrador.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuario y contraseña incorrectos, ten en cuenta que para poder ingresar primero debes registrarte.");
+                    JOptionPane.showMessageDialog(this, 
+                            "Usuario y contraseña incorrectos, ten en "
+                                    + "cuenta que para poder ingresar primero "
+                                    + "debes registrarte.");
                 }
-
             } catch (SQLException ex) {
-                Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmLogin.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor rellene todos los campos.");
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor rellene todos los campos.");
         }
     }
 
